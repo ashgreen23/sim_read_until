@@ -26,6 +26,7 @@ from simreaduntil.shared_utils.utils import set_signal_handler
 logger = setup_logger_simple(__name__)
 """module logger"""
 
+#AG has added in "CustomCompoundReadsWriter" class def
 class CustomCompoundReadsWriter(CompoundReadsWriter):
     def __init__(self, *args, output_dir, **kwargs):
         super().__init__(*args, **kwargs)
