@@ -63,7 +63,6 @@ echo "The current base directory to install minimap to is: $tools_dir"
 # install minimap2
 # see https://github.com/lh3/minimap2/releases
 
-
 function install_minimap() {
     echo "Installing minimap2"
     # check if is linux
@@ -71,7 +70,7 @@ function install_minimap() {
         echo "Compiling minimap2 from source"
         curl -L https://github.com/lh3/minimap2/releases/download/v2.26/minimap2-2.26.tar.bz2 | tar -jxvf -
         cd minimap2-2.26
-        make
+        make arm_neon=1 aarch64=1 #changed by AG
     else
         echo "Downloading precompiled minimap2 binary for linux"
         curl -L https://github.com/lh3/minimap2/releases/download/v2.26/minimap2-2.26_x64-linux.tar.bz2 | tar -jxvf -
@@ -102,13 +101,29 @@ echo "export \"PATH=$tools_dir/bin:\$PATH\""
 # separate process independent of the simulator.
 
 echo "Installing conda environment for NanoSim using $conda_or_mamba"
+#AG modified below to activate the pyenv86 alias from AG_py3.7.sh
+CONDA_SUBDIR=osx-64
+$conda_or_mamba create --yes --name nanosim
+source activate nanosim
+$conda_or_mamba config --env --set subdir osx-64
 
-$conda_or_mamba create --yes --name nanosim python=3.7
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv86 init -)"
+pyenv shell pyenv86
+
 # conda init bash does not work for me, so do: 
 # . "/Users/maximilianmordig/software/anaconda/etc/profile.d/conda.sh"
+#AG has placed the tar.bz2 files, including the old version of scikit-learn & htseq & genometools-genometools, in the ont_project directory to get this to run
 $conda_or_mamba install -n nanosim --yes --file external/ont_nanosim/requirements.txt -c conda-forge -c bioconda
 $conda_or_mamba run -n nanosim python -c "import HTSeq; print(HTSeq.__version__)"
 # e.g. conda config --set auto_activate_base false
+
+echo "Installed conda environment for NanoSim"
+
+echo "Installing genometools-genometools using Homebrew"
+
+echo "Successfully installed all dependencies"
 
 echo "Installed conda environment for NanoSim"
 
