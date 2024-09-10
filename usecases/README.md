@@ -5,7 +5,9 @@ A video of this usecase is available here: [CLI interface Youtube](https://youtu
 Here, Ratschlab show how to use the simulator with the CLI interface and provide an example client that randomly decides what action to take. 
 Note that the client does not use the official ReadUntil API as our setup is slightly different. Since their tool is for research, SSL encryption is not needed (as of now), it's restricted to only the essential ReadUntil API methods and the API returns basecalled rather than raw chunks (raise an issue if you want it added).
 
-Prior to running the steps below, ensure you have used my versions of the scripts (these are attached to the files in **my** fork not the original) simulator_server_cli.py, simfasta_to_seqsum.py and seqsum_plotting.py. 
+Prior to running the steps below, ensure you have used my versions of the scripts (these are attached to the files in **my** fork not the original) simulator_server_cli.py, simfasta_to_seqsum.py and seqsum_plotting.py.
+
+You can then modify the random_reads.fasta with the fasta files for your usecase.
 
 Assuming you have followed the installation instructions, do the following starting from a directory of your choice:
 ```{bash}
