@@ -10,6 +10,8 @@ Prior to running the steps below, ensure you have used my versions of the script
 
 You can then modify the random_reads.fasta with the fasta files for your usecase.
 
+If you also want to run install usecase_deps.sh, and you have a MacOS system, you will need to implement the script AG_3.7py.sh in concordance with that. This script is stored on the MRes Project GitHub currently. Otherwise, run the usecase_deps script as outlined in the main page for the package that was written by the developers of the tool. 
+
 Assuming you have followed the installation instructions, do the following starting from a directory of your choice:
 ```{bash}
 mkdir server_client_cli_example
